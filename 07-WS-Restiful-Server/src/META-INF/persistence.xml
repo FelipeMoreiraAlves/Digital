@@ -9,7 +9,7 @@
 			<property name="hibernate.hbm2ddl.auto" value="update"/>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle12cDialect"/>
 			<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
-			<property name="javax.persistence.jdbc.user" value="rm77246"/>
+			<property name="javax.persistence.jdbc.user" value="RM77246"/>
 			<property name="javax.persistence.jdbc.password" value="201194"/>
 			<property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@oracle.fiap.com.br:1521:orcl"/>
 		</properties>	

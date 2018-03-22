@@ -9,18 +9,21 @@ import br.com.fiap.jpa.dao.GenericDAO;
 import br.com.fiap.jpa.exception.CommitException;
 import br.com.fiap.jpa.exception.KeyNotFoundException;
 
-public class GenericDAOImpl<T, K> implements GenericDAO<T, K> {
+public class GenericDAOImpl<T,K> 
+						implements GenericDAO<T, K>{
 
 	private EntityManager em;
-
+	
 	private Class<T> clazz;
-
+	
 	@SuppressWarnings("unchecked")
 	public GenericDAOImpl(EntityManager em) {
 		this.em = em;
-		clazz = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+		clazz = (Class<T>) ((ParameterizedType) 
+			getClass().getGenericSuperclass())
+					.getActualTypeArguments()[0];
 	}
-
+	
 	@Override
 	public void inserir(T entidade) {
 		em.persist(entidade);
@@ -50,7 +53,7 @@ public class GenericDAOImpl<T, K> implements GenericDAO<T, K> {
 		try {
 			em.getTransaction().begin();
 			em.getTransaction().commit();
-		} catch (Exception e) {
+		}catch(Exception e) {
 			if (em.getTransaction().isActive())
 				em.getTransaction().rollback();
 			e.printStackTrace();
@@ -60,7 +63,10 @@ public class GenericDAOImpl<T, K> implements GenericDAO<T, K> {
 
 	@Override
 	public List<T> listar() {
-		return em.createQuery("from " + clazz.getName(), clazz).getResultList();
+		return em.createQuery("from "+clazz.getName(),clazz).getResultList();
 	}
-
+	
 }
+
+
+
