@@ -61,6 +61,7 @@ public class PacienteResource {
 	}
 	
 	@PUT
+	@Path("{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response atualizar(Paciente paciente, @PathParam ("id") int codigo) {
 		paciente.setCodigo(codigo);
@@ -76,7 +77,7 @@ public class PacienteResource {
 	}
 	
 	@DELETE
-	@Path("id")
+	@Path("{id}")
 	public void remover(@PathParam ("id") int codigo) throws KeyNotFoundException {
 		try {
 			dao.remover(codigo);
