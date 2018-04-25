@@ -14,7 +14,7 @@ import br.com.fiap.to.Paciente;
 public class PacienteService {
 
 	Client client = Client.create();
-	private static final String URL = "http://localhost:8080/07-WS-Restiful-Server/rest/selecao";
+	private static final String URL = "http://localhost:8080/07-WS-Restiful-Server/rest/paciente";
 
 	public List<Paciente> listar() throws Exception {
 		WebResource resource = client.resource(URL);
@@ -26,5 +26,20 @@ public class PacienteService {
 		}
 
 		return Arrays.asList(response.getEntity(Paciente[].class));
+	}
+	
+	public void cadastrar(Paciente paciente) throws Exception {
+		WebResource resource = client.resource(URL);
+		
+		ClientResponse response = resource.type(MediaType.APPLICATION_JSON).post(ClientResponse.class);
+		
+		if (response.getStatus() != 200) {
+			throw new Exception("Erro: " + response.getStatus());
+		}
+	}
+	
+	public void remover(int codigo) {
+		WebResource resource = client.resource(URL).path(String.valueOf(codigo));
+		
 	}
 }
