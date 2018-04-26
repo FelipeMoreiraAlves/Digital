@@ -31,15 +31,30 @@ public class PacienteService {
 	public void cadastrar(Paciente paciente) throws Exception {
 		WebResource resource = client.resource(URL);
 		
-		ClientResponse response = resource.type(MediaType.APPLICATION_JSON).post(ClientResponse.class);
+		ClientResponse response = resource.type(MediaType.APPLICATION_JSON).post(ClientResponse.class, paciente);
 		
-		if (response.getStatus() != 200) {
+		if (response.getStatus() != 201) {
 			throw new Exception("Erro: " + response.getStatus());
 		}
 	}
 	
-	public void remover(int codigo) {
+	public void remover(int codigo) throws Exception {
 		WebResource resource = client.resource(URL).path(String.valueOf(codigo));
 		
+		ClientResponse response = resource.delete(ClientResponse.class);
+		
+		if (response.getStatus() != 204) {
+			throw new Exception("Erro: " + response.getStatus());
+		}
+	}
+	
+	public void atualizar(Paciente paciente) throws Exception {
+		WebResource resource = client.resource(URL).path(String.valueOf(paciente.getCodigo()));
+		
+		ClientResponse response = resource.type(MediaType.APPLICATION_JSON).put(ClientResponse.class, paciente);
+		
+		if (response.getStatus() != 200) {
+			throw new Exception("Erro: " + response.getStatus());
+		}
 	}
 }

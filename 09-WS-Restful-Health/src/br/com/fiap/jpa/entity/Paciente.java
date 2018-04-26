@@ -22,7 +22,6 @@ public class Paciente {
 	@Column(name = "nm_paciente")
 	private String nome;
 
-	@JsonFormat(pattern="dd/MM/yyyy")
 	@Column(name = "dt_nascimento")
 	private Calendar dataNascimento;
 

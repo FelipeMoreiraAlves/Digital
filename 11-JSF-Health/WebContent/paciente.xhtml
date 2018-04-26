@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+<h:head>
+	<title>Cadastrar Paciente</title>
+	<h:outputStylesheet library="css" name="bootstrap.min.css" />
+	<h:outputScript library="js" name="jquery-3.3.1.min.js" />
+	<h:outputScript library="js" name="bootstrap.min.js" />
+</h:head>
+<h:body>
+	<h1>Cadastro de pacientes</h1>
+	<h:form>
+	<h:inputHidden value="#{pacienteBean.paciente.codigo}" />
+		<h:outputLabel value="Name: " for="name" />
+		<h:inputText value="#{pacienteBean.paciente.nome}" id="name" />
+
+		<h:outputLabel value="Doador: " for="idDoador" />
+		<h:selectBooleanCheckbox value="#{pacienteBean.paciente.doador}"
+			id="idDoador" />
+		
+		<h:outputLabel value="Data de Nascimento" for="data" />
+		<h:inputText value="#{pacienteBean.paciente.dataNascimento.time}" id="data">
+			<f:convertDateTime  pattern="dd/MM/yyyy"/>
+		</h:inputText>
+
+		<h:commandButton action="#{pacienteBean.salvar()}" value="Salvar" />
+	</h:form>
+</h:body>
+</html>
