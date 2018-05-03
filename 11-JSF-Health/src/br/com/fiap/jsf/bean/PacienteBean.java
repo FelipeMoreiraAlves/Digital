@@ -32,11 +32,17 @@ public class PacienteBean {
 		return paciente;
 	}
 
-	public List<Paciente> getPacientes() throws Exception {
-		return service.listar();
+	public List<Paciente> getPacientes() {
+		try {
+			return service.listar();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 
-	public void salvar(){
+	public String salvar(){
 		FacesMessage msg;
 		try {
 			if (paciente.getCodigo() == 0) {
@@ -52,10 +58,10 @@ public class PacienteBean {
 			msg = new FacesMessage("Erro...");
 		}
 		FacesContext.getCurrentInstance().addMessage(null, msg);
-
+		return "lista-paciente?faces-redirect=true";
 	}
 
-	public void deletar(int codigo) {
+	public String deletar(int codigo) {
 		FacesMessage msg;
 		try {
 			service.remover(codigo);
@@ -65,5 +71,6 @@ public class PacienteBean {
 			msg = new FacesMessage("Erro ao apagar Paciente");
 		}
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+		return "lista-paciente?faces-redirect=true";
 	}
 }
